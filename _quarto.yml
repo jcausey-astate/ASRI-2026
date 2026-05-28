@@ -1,0 +1,30 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "*_complete_*.ipynb"
+    - "!*.zip"
+    - "!*.data"
+    - "!datasets/"
+    - "!*.names"
+    - "!DryBeanDataset/"
+    - "!z_recordings/"
+  # post-render:
+  #   - "cp images/*.svg docs/images/"
+  resources:
+    - images/*.svg
+
+website:
+  title: "ASRI-2026"
+  navbar: false
+
+format:
+  html:
+    theme: lux
+    grid:
+      sidebar-width: 0rem
+      body-width: 1200px
+      margin-width: 0rem
+      gutter-width: 1rem
+    css: styles.css

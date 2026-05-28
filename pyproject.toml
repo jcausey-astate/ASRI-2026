@@ -1,0 +1,22 @@
+[project]
+name = "asri-2026"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "arff>=0.9",
+    "black[jupyter]>=25.1.0",
+    "datasets>=3.6.0",
+    "ipykernel>=6.29.5",
+    "jupytext>=1.17.1",
+    "matplotlib>=3.10.3",
+    "numpy>=2.2.6",
+    "palmerpenguins>=0.1.4",
+    "plotly>=6.1.1",
+    "scikit-learn>=1.6.1",
+    "scikit-plot>=0.3.7",
+    "scipy>=1.15.3",
+    "seaborn>=0.13.2",
+    "ucimlrepo>=0.0.7",
+    "xlrd>=2.0.1",
+]

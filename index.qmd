@@ -1,0 +1,61 @@
+::: {#glyphs}
+[![](images/Orcid%20logo.svg)](https://orcid.org/0000-0002-3985-2919){target="_blank" title="ORCiD"}
+[![](images/github-mark.svg)](https://github.com/jcausey-astate/ASRI-2026){target="_blank" title="View on GitHub"}
+:::
+
+# Notebooks for [ASRI-2026](https://www.arkansasedc.com/arkansas-nsf-epscor/division/data-analytics-that-are-robust-trusted-(dart)/arkansas-summer-research-institute) Summer Workshops
+
+[Content will appear below as each workshop is held.]{.note}
+
+
+## June 04: Regression Techniques in Python (Intermediate)
+
+::: {.indented}
+
+#### Workshop version (with open exercises to complete)
+
+<https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_regression_ASRI26.ipynb>
+
+#### Completed version for reference
+
+<https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_regression_complete_ASRI26.ipynb>
+
+#### [Non-interactive web version](python_intermediate_regression_complete_ASRI26.html)
+
+:::
+
+## June 05: Classification Techniques in Python (Intermediate)
+
+::: {.indented}
+
+#### Workshop version (with open exercises to complete)
+
+<https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_classification_ASRI26.ipynb>
+
+#### Completed version for reference
+
+<https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_classification_complete_ASRI26.ipynb>
+
+#### [Non-interactive web version](python_intermediate_classification_complete_ASRI26.html)
+
+:::
+
+## June 09: Clustering Techniques in Python (Intermediate)
+
+::: {.indented}
+
+#### Workshop version (with open exercises to complete)
+
+<https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_clustering_ASRI26.ipynb>
+
+#### Completed version for reference
+
+<https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_clustering_complete_ASRI26.ipynb>
+
+#### [Non-interactive web version](python_intermediate_clustering_complete_ASRI26.html)
+
+:::
+
+:::{#footer}
+2026 [Jason L. Causey](https://jasoncausey.net/cv/){target=_blank},  [Department of Computer Science, Arkansas State University](https://www.astate.edu/college/ecs/computer-science/){target=_blank}. [ORCiD: 0000-0002-3985-2919](https://orcid.org/0000-0002-3985-2919){target=_blank}
+:::
