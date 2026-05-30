@@ -28,3 +28,6 @@ format:
       margin-width: 0rem
       gutter-width: 1rem
     css: styles.css
+    include-in-header:
+      - text: |
+            <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;700&display=swap" rel="stylesheet">
