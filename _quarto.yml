@@ -10,6 +10,7 @@ project:
     - "!*.names"
     - "!DryBeanDataset/"
     - "!z_recordings/"
+    - "!ASRI*/*"
   # post-render:
   #   - "cp images/*.svg docs/images/"
   resources:
