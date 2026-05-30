@@ -21,6 +21,11 @@ h2 {
     margin-bottom: 0rem;
 }
 
+main {
+    margin-left: 6rem;
+    margin-right: 6rem;
+}
+
 .indented {
     margin-left: 1rem;
 }
