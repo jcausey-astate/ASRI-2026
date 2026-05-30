@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-99.9.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>python_intermediate_clustering_complete_asri26 – ASRI-2026</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-3aa970819e70fbc78806154e5a1fcd28.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-02746f87f32d486400bfe69a6bac827c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<p><a target="_blank" href="https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_clustering_complete_ASRI26.ipynb"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"> </a></p>
+<section id="clustering-in-python-intermediate" class="level1">
+<h1>Clustering in Python (Intermediate)</h1>
+<section id="asri-2026" class="level2">
+<h2 class="anchored" data-anchor-id="asri-2026">ASRI 2026</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jcausey-astate.github.io/ASRI-2026/images/clustering_in_python_title_card.svg" class="img-fluid figure-img"></p>
+<figcaption>Classification in Python (Intermediate)</figcaption>
+</figure>
+</div>
+<p>This notebook shows some introductory examples from the “Clustering in Python” workshop session.</p>
+<p>The notebook uses the following modules:</p>
+<ul>
+<li><code>matplotlib</code> : Provides basic graphing/charting.</li>
+<li><code>numpy</code> : Allows matrix and vector/array math.</li>
+<li><code>pandas</code> : Provides DataFrame functionality.</li>
+<li><code>scipy</code> : SciPy provides algorithms for optimization, algebraic equations, statistics and many other classes of problems. We will use it for building dendrograms.</li>
+<li><code>seaborn</code> : Works with <code>matplotlib</code> to provide nicer graphs.</li>
+<li><code>sklearn</code> : Scikit-Learn provides machine learning and data manipulation tools.</li>
+</ul>
+<p>We will rely heavily on the Scikit-Learn library for models, metrics, and experimental design tools. See the full documentation for this fantastic library at <a href="https://scikit-learn.org" class="uri">https://scikit-learn.org</a>.</p>
+<hr>
+<p><strong>Clustering</strong> is an <em>unsupervised</em> learning technique for exploring relationships between the random variables in a dataset. We use a clustering analysis to try to identify groups or similar objects in datasets with two or more random variables.</p>
+<p>In this tutorial, we will look at some commonly-used clustering techniques:</p>
+<ul>
+<li><strong>k-Means Clustering</strong>
+<ul>
+<li>Probably the most common clustering technique.</li>
+<li>Good for finding clusters that look like “blobs” when visualized.</li>
+<li>You need to know the number of clusters in advance.</li>
+</ul></li>
+<li><strong>Mean Shift Clustering</strong>
+<ul>
+<li>Doesn’t require assumptions about the number of clusters.</li>
+<li>Somewhat robust when clusters are not simple “blobs”.</li>
+</ul></li>
+<li><strong>DBSCAN</strong> (Density-Based Spatial Clustering of Applications with Noise)
+<ul>
+<li>Clusters areas of similar <em>density</em>, regardless of cluster “shape”.</li>
+<li>Works for situations where clusters don’t look like separate “blobs”.</li>
+<li>You don’t need to know the number of clusters in advance.</li>
+</ul></li>
+<li><strong>HDBSCAN</strong> (Hierarchical DBSCAN)
+<ul>
+<li>Runs DBSCAN across a range of density scales and keeps the most stable clusters.</li>
+<li>Handles clusters of varying density — no need to tune a single <code>eps</code> threshold.</li>
+<li>Automatically determines the number of clusters.</li>
+</ul></li>
+<li><strong>Agglomerative Hierarchical Clustering</strong>
+<ul>
+<li>Establishes relationships at all levels of the comparison metric between all samples.</li>
+<li>Can be visualized as a <em>dendrogram</em>.</li>
+<li>Allows you to determine the “right” number of clusters by examining the dendrogram.</li>
+</ul></li>
+<li><strong>Gaussian Mixture Model</strong>
+<ul>
+<li>Assumes the data can be represented as some number of multi-dimensional Gaussian distributions.</li>
+<li>Works well when the data are “blob” shaped, even when they overlap, especially if the density of the blobs differ.</li>
+<li>Ideally, you need to know how many “blobs” to expect.</li>
+</ul></li>
+</ul>
+<p>ℹ️ More information about these techniques and many others is available at <a href="https://scikit-learn.org/stable/modules/clustering.html" class="uri">https://scikit-learn.org/stable/modules/clustering.html</a>.</p>
+<hr>
+</section>
+<section id="lets-see-some-code" class="level2">
+<h2 class="anchored" data-anchor-id="lets-see-some-code">Let’s see some code</h2>
+<p>First, we have to import the modules, objects, and functions we will be using in this tutorial:</p>
+<div id="fd549fb3" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> cluster</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> HDBSCAN</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> MeanShift</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.mixture <span class="im">import</span> GaussianMixture</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="comparing-clustering-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-clustering-techniques">Comparing clustering techniques</h2>
+<p><em>There is no single perfect clustering algorithm.</em> Different algorithms make different assumptions with regards to what you already know about your dataset.</p>
+<p>For that reason, we will use a few different datasets to illustrate the strengths and weaknesses of each clustering algorithm.</p>
+<p><strong>Here are the datasets we will use:</strong></p>
+<ul>
+<li><strong>Palmer Penguins</strong> : This real-world dataset contains measurements of the bill length versus the flipper length of three species of penguins at the Palmer Antarctic research station. <a href="https://allisonhorst.github.io/palmerpenguins/articles/intro.html" class="uri">https://allisonhorst.github.io/palmerpenguins/articles/intro.html</a></li>
+<li><strong>Moons</strong> : This simulated dataset consists of two crescent “moon” shapes, with one inverted so that there is no way to linearly separate the two groups, but they are visually separate.</li>
+<li><strong>Circles</strong> : This simulated dataset consists of two concentric rings, representing noisy values that are in one of two groups, assigned by the radius of the ring in which the sample is located.</li>
+<li><strong>Density Blobs</strong> : This simulated dataset will consist of three “blobs” with widely varying density and size characteristics. The blobs overlap so that they are not perfectly visually separable.</li>
+</ul>
+<p>The following code block creates the simulated datasets and loads the Palmer Penguins dataset and selects the two predictors we will use for this tutorial.</p>
+<div id="741104d1" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># penguins : this is a real dataset, so we will load it and select a useful set of</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#            features.  We will also store the labels.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>).dropna(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    axis<span class="op">=</span><span class="dv">0</span>, subset<span class="op">=</span>[<span class="st">"bill_length_mm"</span>, <span class="st">"flipper_length_mm"</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>penguins_encoder <span class="op">=</span> LabelEncoder().fit(penguins[<span class="st">"species"</span>].values)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>penguins_classes <span class="op">=</span> penguins_encoder.classes_</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>penguins_labels <span class="op">=</span> penguins_encoder.transform(penguins[<span class="st">"species"</span>].values)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> penguins[[<span class="st">"bill_length_mm"</span>, <span class="st">"flipper_length_mm"</span>]].values</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> StandardScaler().fit_transform(penguins)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># moons : two crescent "moon" shapes, with one inverted so that there is no way to</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># linearly separate the two groups, but they are visually separate.</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>moons, moons_labels <span class="op">=</span> datasets.make_moons(n_samples<span class="op">=</span>n_samples, noise<span class="op">=</span><span class="fl">0.065</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>moons <span class="op">=</span> StandardScaler().fit_transform(moons)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># circles : two concentric rings, representing noisy values that are in one of two</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># groups, assigned by the radius of the ring in which the sample is located.</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>circles, circles_labels <span class="op">=</span> datasets.make_circles(</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span>n_samples, factor<span class="op">=</span><span class="fl">0.5</span>, noise<span class="op">=</span><span class="fl">0.065</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>circles <span class="op">=</span> StandardScaler().fit_transform(circles)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># density blobs : three "blobs" with widely varying density and size characteristics.</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># The blobs overlap so that they are not perfectly visually separable.</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>density_blobs, density_blobs_labels <span class="op">=</span> datasets.make_blobs(</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span>n_samples, cluster_std<span class="op">=</span>[<span class="fl">1.9</span>, <span class="fl">0.5</span>, <span class="fl">2.7</span>], random_state<span class="op">=</span><span class="dv">4</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>density_blobs <span class="op">=</span> StandardScaler().fit_transform(density_blobs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>ℹ️ <strong>Why do we scale the data before clustering?</strong></p>
+<p>Distance-based clustering algorithms (like k-Means, DBSCAN, and Agglomerative) measure similarity using <em>distances</em> between points. If features have very different scales, the feature with the largest values will dominate the distance calculation — even if it carries no more information than the others.</p>
+<p>For example, in the penguins dataset, bill length is measured in millimeters (roughly 30–60 mm) while flipper length is also in millimeters (roughly 170–230 mm). Without scaling, flipper length differences would contribute much more to the distance than bill length differences, simply because of its larger range.</p>
+<p><code>StandardScaler</code> fixes this by transforming each feature to have mean 0 and standard deviation 1 before clustering:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> StandardScaler().fit_transform(X)   <span class="co"># returns a NumPy array</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Rule of thumb:</strong> Scale your data before clustering unless you have a specific reason to keep the original units.</p>
+<p>💡 To make understanding the data easier, we need a way to visualize the datasets, plus give hints about what the “expected” labeling would be as well as what a clustering technique assigns as labels.</p>
+<p>We will create a function that can take a list of datasets with corresponding names, labels, and styles. The function will use the Seaborn <code>scatterplot()</code> function to plot the datasets in a grid.</p>
+<div id="49bfb694" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_all(data_list, names<span class="op">=</span><span class="va">None</span>, label_list<span class="op">=</span><span class="va">None</span>, style_list<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Plot scatterplots for all the 2-D datasets in `data_list`.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">    `names` provide a title for each plot</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">    `label_list` is a list of label assignments for the samples in the data list.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">    `style_list` is a list of marker shape assignments for the samples in the data list.</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    nrows <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(<span class="bu">len</span>(data_list) <span class="op">/</span> <span class="dv">2</span>, <span class="dv">0</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    fig, axs <span class="op">=</span> plt.subplots(nrows<span class="op">=</span>nrows, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(nrows):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            hue <span class="op">=</span> label_list[r <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> c] <span class="cf">if</span> label_list <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>            style <span class="op">=</span> style_list[r <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> c] <span class="cf">if</span> style_list <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            title <span class="op">=</span> names[r <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> c] <span class="cf">if</span> names <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            sns.scatterplot(</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                x<span class="op">=</span>data_list[r <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> c][:, <span class="dv">0</span>],</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                y<span class="op">=</span>data_list[r <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> c][:, <span class="dv">1</span>],</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                hue<span class="op">=</span>hue,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                style<span class="op">=</span>style,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                palette<span class="op">=</span>sns.color_palette(n_colors<span class="op">=</span><span class="bu">len</span>(<span class="bu">set</span>(hue))),</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                legend<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                ax<span class="op">=</span>axs[r, c],</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>            ).<span class="bu">set</span>(title<span class="op">=</span>title)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    plt.subplots_adjust(wspace<span class="op">=</span><span class="fl">0.50</span>)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="visualize" class="level3">
+<h3 class="anchored" data-anchor-id="visualize">👀 Visualize!</h3>
+<p>Now, let’s use the <code>plot_all()</code> function to plot our four datasets. We will use the “real” labels to color the points so that you can see what the “ideal” labeling would be.</p>
+<div id="3834e2e2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:853}}" data-outputid="fd7b8094-045d-41c0-9330-ea72ef2567a4" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plot_all(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    [penguins, moons, circles, density_blobs],</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Penguins"</span>, <span class="st">"Moons"</span>, <span class="st">"Circles"</span>, <span class="st">"Density Blobs"</span>],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    [penguins_labels, moons_labels, circles_labels, density_blobs_labels],</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_clustering_complete_ASRI26_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>💡 <strong>Keep in mind</strong> that in many real-world clustering applications, we will <em>not</em> know what the “correct” or “ideal” labels are.</p>
+<p><strong>That is the “main idea” of clustering:</strong> It is a technique for <em>suggesting a possible labeling</em> for a dataset by examining relationships between the samples.</p>
+</section>
+<section id="k-means" class="level3">
+<h3 class="anchored" data-anchor-id="k-means">k-Means</h3>
+<p>Let’s start with <strong><em>k-Means</em></strong> clustering. <strong>k-Means is probably the most well-known clustering technique because it is simple</strong>, intuitive to understand, and it works well for clustering lots of datasets where we can visually identify “groups” in a scatterplot.</p>
+<p>k-Means works by first choosing a value <span class="math inline">\(k\)</span> that represents <em>the desired number of clusters</em>. You need to already know something about the dataset to correctly choose <span class="math inline">\(k\)</span> (for example, you may visualize it first and choose the number that seem right from looking at the scatterplot). There are also some techniques for choosing <span class="math inline">\(k\)</span> if you have no idea of what to try. (See: <a href="https://medium.com/analytics-vidhya/how-to-determine-the-optimal-k-for-k-means-708505d204eb" class="uri">https://medium.com/analytics-vidhya/how-to-determine-the-optimal-k-for-k-means-708505d204eb</a>)</p>
+<p>Let’s see how k-Means would label each of our test datasets. We “know” from looking at the scatterplots that there are three groups in the “penguins” and “density blobs” datasets, and there are two groups in the “moons” and “circles” datasets. So, we will choose <span class="math inline">\(k\)</span> for each dataset to match our expectation.</p>
+<div id="a758eb7d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:853}}" data-outputid="954505f3-e69c-4422-89b6-958fe76e1544" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>kmeans_k2 <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span><span class="dv">1</span>)  <span class="co"># k-Means with 2 clusters</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>kmeans_k3 <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">1</span>)  <span class="co"># k-Means with 3 clusters</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We apply k-Means to each dataset with the `fit_predict()` method.  We "believe"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># that "moons" and "circles" should have k=2 and "penguins" and "density_blobs"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># should have k=3.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>penguins_kmeans <span class="op">=</span> kmeans_k3.fit_predict(penguins)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>moons_kmeans <span class="op">=</span> kmeans_k2.fit_predict(moons)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>circles_kmeans <span class="op">=</span> kmeans_k2.fit_predict(circles)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>density_blobs_kmeans <span class="op">=</span> kmeans_k3.fit_predict(density_blobs)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let's see how the proposed clusters look.  We will use the "ideal" labels</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># to determine the shapes of the markers in the plots here so that we can compare:</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plot_all(</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    [penguins, moons, circles, density_blobs],</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Penguins (k=3)"</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Moons (k=2)"</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Circles (k=2)"</span>,</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Density Blobs (k=3)"</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    [penguins_kmeans, moons_kmeans, circles_kmeans, density_blobs_kmeans],</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    [penguins_labels, moons_labels, circles_labels, density_blobs_labels],</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_clustering_complete_ASRI26_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>🤔 We can see that k-Means does a reasonable job of finding the three groups in the “penguins” dataset. One of those groups (the Chinstrap penguins) is difficult to separate even with more complicated methods. The method does a good job of separating the two “easier” groups (Adelie and Gentoo).</p>
+<p>❓ <strong><em>What if we chose <span class="math inline">\(k\)</span> incorrectly?</em></strong> Let’s see by first assuming <span class="math inline">\(k=2\)</span> for all four datasets:</p>
+<div id="b9137ee1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:853}}" data-outputid="52d6b1c9-2099-4251-ca6a-38fb482eed79" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What if we believe there are 2 clusters in each of the datasets?</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We apply k-Means with k=2 to each dataset with the `fit_predict()` method.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>penguins_kmeans <span class="op">=</span> kmeans_k2.fit_predict(penguins)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>moons_kmeans <span class="op">=</span> kmeans_k2.fit_predict(moons)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>circles_kmeans <span class="op">=</span> kmeans_k2.fit_predict(circles)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>density_blobs_kmeans <span class="op">=</span> kmeans_k2.fit_predict(density_blobs)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let's see how the proposed clusters look.  We will use the "ideal" labels</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># to determine the shapes of the markers in the plots here so that we can compare:</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plot_all(</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    [penguins, moons, circles, density_blobs],</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Penguins (k=2)"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Moons (k=2)"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Circles (k=2)"</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Density Blobs (k=2)"</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    [penguins_kmeans, moons_kmeans, circles_kmeans, density_blobs_kmeans],</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    [penguins_labels, moons_labels, circles_labels, density_blobs_labels],</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_clustering_complete_ASRI26_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>❓ <strong>What do you think about these clusters?</strong></p>
+<p>…</p>
+<p>Now, let’s incorrectly assume <span class="math inline">\(k=4\)</span> for all four datasets:</p>
+<div id="2d6bc02d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:853}}" data-outputid="fad232c3-20ef-471f-a2c6-1336b539ad77" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What if we believe there are 4 clusters in all of the datasets?</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>kmeans_k4 <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">4</span>, random_state<span class="op">=</span><span class="dv">1</span>)  <span class="co"># k-Means with 4 clusters</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We apply k-Means to each dataset with the `fit_predict()` method.</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>penguins_kmeans <span class="op">=</span> kmeans_k4.fit_predict(penguins)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>moons_kmeans <span class="op">=</span> kmeans_k4.fit_predict(moons)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>circles_kmeans <span class="op">=</span> kmeans_k4.fit_predict(circles)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>density_blobs_kmeans <span class="op">=</span> kmeans_k4.fit_predict(density_blobs)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let's see how the proposed clusters look.  We will use the "ideal" labels</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># to determine the shapes of the markers in the plots here so that we can compare:</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plot_all(</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    [penguins, moons, circles, density_blobs],</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Penguins (k=4)"</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Moons (k=4)"</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Circles (k=4)"</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Density Blobs (k=4)"</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    [penguins_kmeans, moons_kmeans, circles_kmeans, density_blobs_kmeans],</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    [penguins_labels, moons_labels, circles_labels, density_blobs_labels],</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_clustering_complete_ASRI26_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>ℹ️ With k-Means, the clustering is <em>stochastic</em>, meaning that it will be different each time you run it (unless you set the <code>random_state</code> to make it reproducible).</p>
+<p><strong>Let’s see that in action:</strong></p>
+<div id="94ddc9a3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:853}}" data-outputid="d3ad0fee-a879-4eba-94b3-a7d2edfbe769" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What if we believe there are 4 clusters in all of the datasets?</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>kmeans_k4 <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">4</span>)  <span class="co"># k-Means with 4 clusters, no fixed random state.</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We apply k-Means to each dataset with the `fit_predict()` method.</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>penguins_kmeans_1 <span class="op">=</span> kmeans_k4.fit_predict(penguins)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>penguins_kmeans_2 <span class="op">=</span> kmeans_k4.fit_predict(penguins)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>penguins_kmeans_3 <span class="op">=</span> kmeans_k4.fit_predict(penguins)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>penguins_kmeans_4 <span class="op">=</span> kmeans_k4.fit_predict(penguins)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let's see how the proposed clusters look.  We will use the "ideal" labels</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># to determine the shapes of the markers in the plots here so that we can compare:</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>plot_all(</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    [penguins, penguins, penguins, penguins],</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Penguins (k=4)"</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Penguins (k=4)"</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Penguins (k=4)"</span>,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k-Means Penguins (k=4)"</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    [penguins_kmeans_1, penguins_kmeans_2, penguins_kmeans_3, penguins_kmeans_4],</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    [penguins_labels, penguins_labels, penguins_labels, penguins_labels],</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_clustering_complete_ASRI26_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>💡 Keep in mind when using k-Means: A single run does not give you any indication confidence that the labeling was stable. <em>(A stable labeling is an indication that the labeling is more likely “correct” with respect to some real-world relationship.)</em></p>
+<p>You can run the clustering several times and compare the stability of the cluster assignments to get an idea of whether the algorithms is seeing “real” groups or just randomly assigning them based on the initial seed points chosen.</p>
+<p>For more information on measuring the stability of a clustering assignment, see the following article:</p>
+<p><a href="https://amueller.github.io/aml/04-model-evaluation/17-cluster-evaluation.html" class="uri">https://amueller.github.io/aml/04-model-evaluation/17-cluster-evaluation.html</a></p>
+<p>ℹ️ <strong>Two practical takeaways from stochastic clustering:</strong></p>
+<ol type="1">
+<li><strong>Set <code>random_state</code></strong> when you need reproducible results — the same integer seed will always produce the same clustering, which is important for sharing and debugging.</li>
+<li><strong>If the clusters change drastically between runs</strong>, that is a warning sign: the algorithm may not be seeing real structure in the data, or the chosen value of <span class="math inline">\(k\)</span> may not be a good fit.</li>
+</ol>
+</section>
+<section id="mean-shift-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="mean-shift-clustering">Mean-Shift Clustering</h3>
+<p>Mean-Shift clustering provides a powerful technique for clustering a dataset when we <em>don’t already know the number of clusters</em>.</p>
+<div id="c25284f9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:853}}" data-outputid="1a8e50f8-b32e-4983-89da-61fbc181512b" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For each dataset, we need to estimate the bandwidth parameter, then create the</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># MeanShift object.  To automate this, we will wrap the two steps up into a function.</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_MeanShift(X, quantile<span class="op">=</span><span class="fl">0.25</span>):</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    bandwidth <span class="op">=</span> cluster.estimate_bandwidth(X, quantile<span class="op">=</span>quantile)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> MeanShift(bandwidth<span class="op">=</span>bandwidth)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Now build a MeanShift clusterer for each dataset and use it to fit/predict.</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>penguins_ms <span class="op">=</span> build_MeanShift(penguins).fit_predict(penguins)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>moons_ms <span class="op">=</span> build_MeanShift(moons).fit_predict(moons)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>circles_ms <span class="op">=</span> build_MeanShift(circles, quantile<span class="op">=</span><span class="fl">0.2</span>).fit_predict(circles)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>density_blobs_ms <span class="op">=</span> build_MeanShift(density_blobs, quantile<span class="op">=</span><span class="fl">0.1</span>).fit_predict(</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    density_blobs</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Now plot them:</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>plot_all(</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    [penguins, moons, circles, density_blobs],</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mean Shift Penguins"</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mean Shift Moons"</span>,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mean Shift Circles"</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mean Shift Density Blobs"</span>,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    [penguins_ms, moons_ms, circles_ms, density_blobs_ms],</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    [penguins_labels, moons_labels, circles_labels, density_blobs_labels],</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_clustering_complete_ASRI26_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>🤔 Mean-Shift did a very good job on the Penguins dataset, without needing to know that there were three groups! It didn’t do so well with the other datasets though. Circles and Moons are not “blob-like” enough for this technique to work well. In the density blobs dataset, it did (sort of) find the small dense blob… But at the expense of finding many more small clusters that don’t really exist.</p>
+<p>ℹ️ The <code>bandwidth</code> parameter is the most important tuning parameter for this algorithm, and it can be tricky to get just right. The <code>estimate_bandwidth()</code> function is provided to help find a good bandwidth value, but it also has a tuning parameter <code>quantile</code> that can be a bit finicky. Some trial-and-error may be required to get results that seem correct.</p>
+</section>
+<section id="dbscan" class="level3">
+<h3 class="anchored" data-anchor-id="dbscan">DBSCAN</h3>
+<p>The DBSCAN technique looks for regions of <em>similar density</em>, and assumes that those regions represent groups of samples. It is also capable of automatically identifying <em>outliers</em> (or “noise points”) that may not belong to any group.</p>
+<div id="3828fb28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:853}}" data-outputid="ad8f7932-c76d-483a-b330-12d0706a965b" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Like MeanShift, there is an important tuning parameter ('eps') for DBSCAN.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use DBSCAN to cluster each dataset:</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>penguins_DBSCAN <span class="op">=</span> DBSCAN(eps<span class="op">=</span><span class="fl">0.25</span>).fit_predict(penguins)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>moons_DBSCAN <span class="op">=</span> DBSCAN(eps<span class="op">=</span><span class="fl">0.3</span>).fit_predict(moons)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>circles_DBSCAN <span class="op">=</span> DBSCAN(eps<span class="op">=</span><span class="fl">0.28</span>).fit_predict(circles)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>density_blobs_DBSCAN <span class="op">=</span> DBSCAN(eps<span class="op">=</span><span class="fl">0.1</span>).fit_predict(density_blobs)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Now plot them:</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plot_all(</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    [penguins, moons, circles, density_blobs],</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"DBSCAN Penguins"</span>,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"DBSCAN Moons"</span>,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"DBSCAN Circles"</span>,</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"DBSCAN Density Blobs"</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    [penguins_DBSCAN, moons_DBSCAN, circles_DBSCAN, density_blobs_DBSCAN],</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    [penguins_labels, moons_labels, circles_labels, density_blobs_labels],</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_clustering_complete_ASRI26_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>🤔 We can see that DBSCAN did a very good job on the “strange” datasets (moons and circles). It also did a decent job with the Penguins dataset. The performance on the density blobs data is interesting: It identified the small dense cluster, but found spurious extra clusters as well. It also failed to see the two larger clusters as separate objects.</p>
+<p>ℹ️ DBSCAN requires careful tuning of the <code>eps</code> parameter, which is related to the expected density of clusters. When there is a wide variation in the density of “real” clusters, DBSCAN can fail to perform well (as it did here). However, if there is a sparse background of noisy points with some clusters of similar density, DBSCAN will find those clusters even if they are not “blob-shaped”.</p>
+<p>❓ <strong>What does the label <code>-1</code> mean in DBSCAN and HDBSCAN output?</strong></p>
+<p>Both algorithms can designate points as <em>noise</em> — samples that don’t belong to any cluster. These points are assigned the label <strong><code>-1</code></strong> in the output array.</p>
+<p>This is actually a feature, not a bug: it means the algorithm is telling you that some points are outliers or don’t fit cleanly into any group.</p>
+<p><strong>Practical guidance:</strong></p>
+<ul>
+<li>If only a few points are labeled <code>-1</code>, they are likely genuine outliers — this is useful information.</li>
+<li>If a <em>large fraction</em> of points are <code>-1</code>, the tuning parameters may need adjustment:
+<ul>
+<li>For <strong>DBSCAN</strong>: try increasing <code>eps</code> (a larger neighborhood radius will pull more points into clusters).</li>
+<li>For <strong>HDBSCAN</strong>: try decreasing <code>min_cluster_size</code> (smaller clusters will be kept rather than collapsed into noise).</li>
+</ul></li>
+</ul>
+</section>
+<section id="hdbscan" class="level3">
+<h3 class="anchored" data-anchor-id="hdbscan">HDBSCAN</h3>
+<p>The HDBSCAN technique performs DBSCAN over varying epsilon (<code>eps</code>) values and integrates the result to find a clustering that gives the best stability over epsilon. This allows HDBSCAN to find clusters of varying densities (unlike DBSCAN), and be more robust to parameter selection.</p>
+<div id="6e79f6b8" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># HDBSCAN isn't as sensitive to tuning parameters as DBSCAN, although tuning the </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># `min_cluster_size` can be helpful if you have an idea of how many values should</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># be contained in even the smallest cluster.</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use HDBSCAN to cluster each dataset:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>penguins_HDBSCAN <span class="op">=</span> HDBSCAN().fit_predict(penguins)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>moons_HDBSCAN <span class="op">=</span> HDBSCAN().fit_predict(moons)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>circles_HDBSCAN <span class="op">=</span> HDBSCAN().fit_predict(circles)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>density_blobs_HDBSCAN <span class="op">=</span> HDBSCAN().fit_predict(density_blobs)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Now plot them:</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plot_all(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    [penguins, moons, circles, density_blobs],</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"HDBSCAN Penguins"</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"HDBSCAN Moons"</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"HDBSCAN Circles"</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"HDBSCAN Density Blobs"</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    [penguins_HDBSCAN, moons_HDBSCAN, circles_HDBSCAN, density_blobs_HDBSCAN],</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    [penguins_labels, moons_labels, circles_labels, density_blobs_labels],</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_clustering_complete_ASRI26_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>🤔 HDBSCAN with defaults for all parameters did a pretty good job. It was really good at the circles and moons, but introduced some spurious extra clusters in penguins and density blobs.</p>
+</section>
+<section id="agglomerative-hierarchical-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="agglomerative-hierarchical-clustering">Agglomerative Hierarchical Clustering</h3>
+<div id="502dcd36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:853}}" data-outputid="29fa70a7-a14f-459b-ff4e-fd9decb6c8fe" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use agglomerative clustering to cluster each dataset:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>penguins_ag <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">3</span>, linkage<span class="op">=</span><span class="st">"ward"</span>).fit_predict(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    penguins</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>moons_ag <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">2</span>, linkage<span class="op">=</span><span class="st">"single"</span>).fit_predict(moons)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>circles_ag <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">2</span>, linkage<span class="op">=</span><span class="st">"single"</span>).fit_predict(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    circles</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>density_blobs_ag <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">3</span>, linkage<span class="op">=</span><span class="st">"ward"</span>).fit_predict(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    density_blobs</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Now plot them:</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>plot_all(</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    [penguins, moons, circles, density_blobs],</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Hierarchical Penguins"</span>,</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Hierarchical Moons"</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Hierarchical Circles"</span>,</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Hierarchical Density Blobs"</span>,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    [penguins_ag, moons_ag, circles_ag, density_blobs_ag],</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    [penguins_labels, moons_labels, circles_labels, density_blobs_labels],</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_clustering_complete_ASRI26_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>🤔 The hierarchical clustering technique did a pretty good job on all the datasets, but we had to do some tuning. Specifically, the choice of <code>linkage</code> can make a big difference, as can the choice of <code>metric</code> (which we did not tune here). We also provided the model with our desired number of clusters. Agglomerative Clustering will work <em>without</em> the number of clusters provided, but it might not produce the desired result. If you know the expected number of clusters, it is very helpful to provide it.</p>
+<p>ℹ️ <strong>Another</strong> thing you can do with hierarchical clustering is to visualize the relationships between the samples as a <strong><em>dendrogram</em></strong>. A dendrogram is a tree-like representation that shows every possible clustering from a single group to <span class="math inline">\(N\)</span> groups (where <span class="math inline">\(N\)</span> is the total number of samples). The height of the vertical lines represent changes in similarity between splits.</p>
+<p>You can use this visualization to get an idea of how many clusters <em>should</em> exist in the dataset. <strong>This can be used to determine <span class="math inline">\(k\)</span> before performing k-Means clustering, or for other models that require knowing the number of groups beforehand.</strong></p>
+<p>💁 The dendrogram visualization is available from SciPy. (See: <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.dendrogram.html#scipy.cluster.hierarchy.dendrogram" class="uri">https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.dendrogram.html#scipy.cluster.hierarchy.dendrogram</a>)</p>
+<p>To see it in action, we will generate dendrogram for the “penguins” dataset:</p>
+<div id="3eec346e" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>linkage_matrix <span class="op">=</span> linkage(penguins, <span class="st">"ward"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">9</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Hierarchical Penguins Dendrogram"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"distance (Ward)"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>dendrogram(linkage_matrix, no_labels<span class="op">=</span><span class="va">True</span>, color_threshold<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_clustering_complete_ASRI26_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>By examining the vertical lines, you can determine the “best” number of clusters by choosing where to “cut” the graph with an imaginary horizontal line.</p>
+</section>
+<section id="gaussian-mixture-model" class="level3">
+<h3 class="anchored" data-anchor-id="gaussian-mixture-model">Gaussian Mixture Model</h3>
+<p>The Gaussian Mixture Model (GMM) works by assuming that clusters are multi-dimensional Gaussian distributions (which look like roughly “circular” blobs that are denser in the middle). It is quite flexible if you have “blob-like” clusters, and GMM-like clusters occur frequently in natural datasets.</p>
+<div id="69c5cdfc" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:853}}" data-outputid="73cc597d-e60c-4a13-8014-ee596c582485" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use a GMM to cluster each dataset.  We assume that penguins and</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># density blobs have three clusters, and that moons and circles have two.</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>penguins_gmm <span class="op">=</span> GaussianMixture(n_components<span class="op">=</span><span class="dv">3</span>).fit_predict(penguins)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>moons_gmm <span class="op">=</span> GaussianMixture(n_components<span class="op">=</span><span class="dv">2</span>).fit_predict(moons)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>circles_gmm <span class="op">=</span> GaussianMixture(n_components<span class="op">=</span><span class="dv">2</span>).fit_predict(circles)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>density_blobs_gmm <span class="op">=</span> GaussianMixture(n_components<span class="op">=</span><span class="dv">3</span>).fit_predict(density_blobs)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Now plot them:</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>plot_all(</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    [penguins, moons, circles, density_blobs],</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"GMM Penguins"</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"GMM Moons"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"GMM Circles"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"GMM Density Blobs"</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    [penguins_gmm, moons_gmm, circles_gmm, density_blobs_gmm],</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    [penguins_labels, moons_labels, circles_labels, density_blobs_labels],</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_clustering_complete_ASRI26_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>🤔 The GMM did a very good job on the “blob-like” datasets “penguins” and “density blobs”. In fact, it probably did <em>best</em> on density blobs (versus the other methods we tried).</p>
+<p>However, it does not do as well with the datasets whose values aren’t “blob-like” in shape.</p>
+</section>
+</section>
+<section id="quick-reference-choosing-a-clustering-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference-choosing-a-clustering-algorithm">Quick Reference: Choosing a Clustering Algorithm</h2>
+<p>Use this table as a starting point when selecting an algorithm for your own data:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Algorithm</th>
+<th>Needs <code>k</code>?</th>
+<th>Non-blob shapes?</th>
+<th>Handles outliers?</th>
+<th>Main gotcha</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>k-Means</strong></td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Must choose <code>k</code>; sensitive to scale and outliers</td>
+</tr>
+<tr class="even">
+<td><strong>Mean-Shift</strong></td>
+<td>No</td>
+<td>Somewhat</td>
+<td>No</td>
+<td><code>bandwidth</code> is tricky to tune; slow on large datasets</td>
+</tr>
+<tr class="odd">
+<td><strong>DBSCAN</strong></td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td><code>eps</code> must be tuned; struggles when cluster densities vary widely</td>
+</tr>
+<tr class="even">
+<td><strong>HDBSCAN</strong></td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td><code>min_cluster_size</code> may need tuning; can over-split some datasets</td>
+</tr>
+<tr class="odd">
+<td><strong>Agglomerative</strong></td>
+<td>Yes (optional)</td>
+<td>Yes (with right linkage)</td>
+<td>No</td>
+<td>Linkage choice matters; memory-intensive for very large datasets</td>
+</tr>
+<tr class="even">
+<td><strong>GMM</strong></td>
+<td>Yes</td>
+<td>No (blob-like)</td>
+<td>No</td>
+<td>Assumes Gaussian clusters; can overfit with too many components</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="thank-you" class="level2">
+<h2 class="anchored" data-anchor-id="thank-you">Thank You!</h2>
+<p>This notebook in tutorial and completed form is available at:</p>
+<p><a href="https://jcausey-astate.github.io/ASRI-2026/" class="uri">https://jcausey-astate.github.io/ASRI-2026/</a></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

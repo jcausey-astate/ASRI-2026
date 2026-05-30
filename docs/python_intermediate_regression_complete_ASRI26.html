@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-99.9.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>python_intermediate_regression_complete_asri26 – ASRI-2026</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-3aa970819e70fbc78806154e5a1fcd28.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-02746f87f32d486400bfe69a6bac827c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<p><a target="_blank" href="https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_regression_complete_ASRI26.ipynb"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"> </a></p>
+<section id="regression-techniques-in-python-intermediate" class="level1">
+<h1>Regression Techniques in Python (Intermediate)</h1>
+<section id="asri-2026" class="level2">
+<h2 class="anchored" data-anchor-id="asri-2026">ASRI 2026</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jcausey-astate.github.io/ASRI-2026/images/regression_in_python_title_card.svg" class="img-fluid figure-img"></p>
+<figcaption>Regression in Python (Intermediate)</figcaption>
+</figure>
+</div>
+<p>The notebook uses the following modules:</p>
+<ul>
+<li><code>matplotlib</code> : Provides basic graphing/charting.</li>
+<li><code>numpy</code> : Allows matrix and vector/array math.</li>
+<li><code>pandas</code> : Provides DataFrame functionality.</li>
+<li><code>seaborn</code> : Works with <code>matplotlib</code> to provide nicer graphs.</li>
+<li><code>sklearn</code> : Scikit-Learn provides machine learning and data manipulation tools.</li>
+</ul>
+<p>We will rely heavily on the Scikit-Learn library for models, metrics, and experimental design tools. See the full documentation for this fantastic library at <a href="https://scikit-learn.org" class="uri">https://scikit-learn.org</a>.</p>
+<hr>
+</section>
+<section id="first-some-terms-and-definitions" class="level2">
+<h2 class="anchored" data-anchor-id="first-some-terms-and-definitions">First, some terms and definitions:</h2>
+<p><strong><em>Regression</em></strong> is the process of predicting a <em>continuous value</em> given the <em>random variables</em> for a given <em>sample</em>.</p>
+<p><strong><em>Continuous</em></strong> values are numeric values that can take on any value within some range. Examples include height, weight, temperature, price, etc.</p>
+<p>A <strong><em>sample</em></strong> consists of all of the experimental information gathered for one item in the dataset. Sometimes a <em>sample</em> is called an <em>object</em> or <em>item</em>. Usually samples are arranged as <em>rows</em> in tabular datasets (CSV files, Excel spreadsheets, or similar).</p>
+<p>A <strong><em>random variable</em></strong>, sometimes called an <em>input variable</em>, <em>measurement</em>, or <em>feature</em>, is the recorded value for some property of the sample that was measured in the experiment, e.g.&nbsp;“weight”, “horsepower”, “number of cylinders”, etc.</p>
+<section id="you-have-a-regression-task-if-the-dependent-variable-output-value-you-are-trying-to-predict-is-continuous." class="level4">
+<h4 class="anchored" data-anchor-id="you-have-a-regression-task-if-the-dependent-variable-output-value-you-are-trying-to-predict-is-continuous.">You have a <em>regression</em> task if the dependent variable (output value) you are trying to predict is <em>continuous</em>.</h4>
+<p>We will focus first on regression tasks where the random variables are also <em>continuous</em>.</p>
+<p>At the end, a section is provided with some tips for working with random variables that are <em>categorical</em>.</p>
+<hr>
+</section>
+</section>
+<section id="lets-see-some-code" class="level2">
+<h2 class="anchored" data-anchor-id="lets-see-some-code">Let’s see some code!</h2>
+<p>First, we have to import the modules, objects, and functions we will be using in this tutorial:</p>
+<div id="080a555d" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="the-dataset">The Dataset</h3>
+<p>For this tutorial, we will use the “Auto MPG” dataset, which is a classic dataset for regression tasks. It contains information about various automobiles, including their fuel consumption in miles per gallon (mpg, which will be our target variable to predict.</p>
+<p>Let’s load the dataset and take a look at it:</p>
+<div id="ef99a9d7" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define column names based on the dataset description</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>column_names <span class="op">=</span> [<span class="st">'mpg'</span>, <span class="st">'cylinders'</span>, <span class="st">'displacement'</span>, <span class="st">'horsepower'</span>, <span class="st">'weight'</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">'acceleration'</span>, <span class="st">'model_year'</span>, <span class="st">'origin'</span>, <span class="st">'car_name'</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the dataset from UCI ML Repository if needed.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> [[ <span class="op">-</span>f auto<span class="op">+</span>mpg.<span class="bu">zip</span> ]] <span class="op">||</span> { wget https:<span class="op">//</span>archive.ics.uci.edu<span class="op">/</span>static<span class="op">/</span>public<span class="op">/</span><span class="dv">9</span><span class="op">/</span>auto<span class="op">+</span>mpg.<span class="bu">zip</span> <span class="op">&amp;&amp;</span> unzip <span class="op">-</span>o auto<span class="op">+</span>mpg.<span class="bu">zip</span> <span class="op">&amp;&amp;</span> rm Index auto<span class="op">-</span>mpg.data<span class="op">-</span>original<span class="op">;</span> }</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>auto_mpg <span class="op">=</span> pd.read_csv(<span class="st">'auto-mpg.data'</span>, sep<span class="op">=</span><span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>, names<span class="op">=</span>column_names)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>auto_mpg.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>--2026-05-22 16:58:17--  https://archive.ics.uci.edu/static/public/9/auto+mpg.zip
+Resolving archive.ics.uci.edu (archive.ics.uci.edu)... 128.195.10.252
+Connecting to archive.ics.uci.edu (archive.ics.uci.edu)|128.195.10.252|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified
+Saving to: ‘auto+mpg.zip’
+
+auto+mpg.zip            [ &lt;=&gt;                ]  14.52K  --.-KB/s    in 0.09s   
+
+2026-05-22 16:58:18 (163 KB/s) - ‘auto+mpg.zip’ saved [14873]
+
+Archive:  auto+mpg.zip
+  inflating: Index                   
+  inflating: auto-mpg.data           
+  inflating: auto-mpg.data-original  
+  inflating: auto-mpg.names          </code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">cylinders</th>
+<th data-quarto-table-cell-role="th">displacement</th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">acceleration</th>
+<th data-quarto-table-cell-role="th">model_year</th>
+<th data-quarto-table-cell-role="th">origin</th>
+<th data-quarto-table-cell-role="th">car_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>18.0</td>
+<td>8</td>
+<td>307.0</td>
+<td>130.0</td>
+<td>3504.0</td>
+<td>12.0</td>
+<td>70</td>
+<td>1</td>
+<td>chevrolet chevelle malibu</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>15.0</td>
+<td>8</td>
+<td>350.0</td>
+<td>165.0</td>
+<td>3693.0</td>
+<td>11.5</td>
+<td>70</td>
+<td>1</td>
+<td>buick skylark 320</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>18.0</td>
+<td>8</td>
+<td>318.0</td>
+<td>150.0</td>
+<td>3436.0</td>
+<td>11.0</td>
+<td>70</td>
+<td>1</td>
+<td>plymouth satellite</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>16.0</td>
+<td>8</td>
+<td>304.0</td>
+<td>150.0</td>
+<td>3433.0</td>
+<td>12.0</td>
+<td>70</td>
+<td>1</td>
+<td>amc rebel sst</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>17.0</td>
+<td>8</td>
+<td>302.0</td>
+<td>140.0</td>
+<td>3449.0</td>
+<td>10.5</td>
+<td>70</td>
+<td>1</td>
+<td>ford torino</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The <strong>mpg</strong> column contains the value that we want to predict (it is our <em>target</em> column). We’ll use the other numeric columns as random variables (predictors).</p>
+<p>It will make things easier if we create variables to contain the name of the target column and the random variables. These can be used when we interact with Pandas DataFrames to quickly select those columns by name.</p>
+<div id="29f4c3f0" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>target_col <span class="op">=</span> <span class="st">"mpg"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>random_var_cols <span class="op">=</span> [</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cylinders"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"displacement"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"horsepower"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"weight"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"acceleration"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model_year"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Let’s use the <code>info()</code> DataFrame method to see what kinds of values we have, and whether there are any missing values.</p>
+<div id="42174a7b" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>auto_mpg.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 398 entries, 0 to 397
+Data columns (total 9 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   mpg           398 non-null    float64
+ 1   cylinders     398 non-null    int64  
+ 2   displacement  398 non-null    float64
+ 3   horsepower    398 non-null    object 
+ 4   weight        398 non-null    float64
+ 5   acceleration  398 non-null    float64
+ 6   model_year    398 non-null    int64  
+ 7   origin        398 non-null    int64  
+ 8   car_name      398 non-null    object 
+dtypes: float64(4), int64(3), object(2)
+memory usage: 28.1+ KB</code></pre>
+</div>
+</div>
+<p>🤔 We notice that the ‘<code>horsepower</code>’ column is not recognized as numeric (the type is reported as “<code>object</code>”). Let’s check if there are any non-numeric values.</p>
+<p>One way to do that is to just look at the values. (But that doesn’t scale well to very large data.)</p>
+<p>If we need to do this often (or on big datasets), we can write a function to check if each value can be converted to a <code>float</code>, and return True if it can or False otherwise. Then, we can just filter and print the values that will not convert:</p>
+<div id="e39ec075" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_number(x):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Returns True if `x` is a number, or False otherwise."""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">float</span>(x)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># List the values and counts for all non-numeric values in the 'horsepower' variable:</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>auto_mpg.loc[auto_mpg[<span class="st">'horsepower'</span>].<span class="bu">apply</span>(is_number) <span class="op">==</span> <span class="va">False</span>, <span class="st">'horsepower'</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>horsepower
+?    6
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<p>From this, we can see that the only non-numeric value is ‘?’. So, we could convert the column to numeric after replacing the ‘?’ values with <code>np.nan</code>, or we can just reload the DataFrame from the CSV file and tell Pandas to treat ‘?’ as NA (missing). We will do the latter to demonstrate how to do it, and because this dataset is small enough that it will not take long to do it that way. (For larger data, the former approach would probably be faster.)</p>
+<div id="a746d9ad" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-load the dataset, treating '?' as NA values.</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>auto_mpg <span class="op">=</span> pd.read_csv(<span class="st">'auto-mpg.data'</span>, sep<span class="op">=</span><span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>, names<span class="op">=</span>column_names, na_values<span class="op">=</span><span class="st">'?'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the info again</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>auto_mpg.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 398 entries, 0 to 397
+Data columns (total 9 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   mpg           398 non-null    float64
+ 1   cylinders     398 non-null    int64  
+ 2   displacement  398 non-null    float64
+ 3   horsepower    392 non-null    float64
+ 4   weight        398 non-null    float64
+ 5   acceleration  398 non-null    float64
+ 6   model_year    398 non-null    int64  
+ 7   origin        398 non-null    int64  
+ 8   car_name      398 non-null    object 
+dtypes: float64(5), int64(3), object(1)
+memory usage: 28.1+ KB</code></pre>
+</div>
+</div>
+<p>Now, we have correct data types. We will still have missing values in ‘<code>horsepower</code>’ though, so we need to remove those rows:</p>
+<p>ℹ️ Pandas has a method called <code>dropna()</code> that can drop missing values.</p>
+<p>In this case, we want to call it with the <code>subset</code> argument set to our random variable cols (<code>random_var_cols</code>) and the <code>axis</code> argument set to 0.</p>
+<div id="d37c41ae" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now drop rows with missing values</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>auto_mpg <span class="op">=</span> auto_mpg.dropna(subset<span class="op">=</span>random_var_cols, axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Data Preparation — Dropping vs.&nbsp;Imputing Missing Values:</strong> Dropping rows with <code>dropna()</code> is fine for us here (only 6 rows out of nearly 400). But if your own dataset has missing values scattered across many columns, <code>dropna()</code> can silently throw away a huge fraction of your samples — sometimes 50% or more — leaving you with a tiny, biased dataset.</p>
+<p>An alternative is <strong><em>imputation</em></strong>: filling in missing values with a reasonable estimate. A common simple approach is to fill with the column’s median<sup><strong>†</strong></sup> or mean:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>auto_mpg[<span class="st">'horsepower'</span>] <span class="op">=</span> auto_mpg[<span class="st">'horsepower'</span>].fillna(auto_mpg[<span class="st">'horsepower'</span>].median())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For your own project: check how many rows <code>dropna()</code> would remove before you commit to dropping them. If it’s a small fraction, dropping is simplest. If it’s a lot, prefer imputation. Scikit-Learn’s <a href="https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html"><code>SimpleImputer</code></a> is a good next step when you want imputation inside a preprocessing pipeline.</p>
+<p><strong>†</strong>: Why median? It is more robust to outliers than mean, but mean is another common choice.</p>
+</blockquote>
+</section>
+<section id="visualize-early-visualize-often" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-early-visualize-often">📊 Visualize Early, Visualize Often</h3>
+<p>Let’s take a look at the dataset. We will plot some relationships between our target variable (mpg) and the predictors. <em>(This will take several seconds.)</em></p>
+<div id="ba184ac2" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sns.pairplot(auto_mpg[random_var_cols <span class="op">+</span> [target_col]], corner<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_regression_complete_ASRI26_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Looking at the pairplot, we can see that there are clear relationships between MPG and the various predictors (bottom row). For example, as weight increases, MPG tends to decrease. Similarly, as horsepower and displacement increase, MPG tends to decrease. These relationships make intuitive sense: heavier cars with more powerful engines typically consume more fuel.</p>
+<p>We can also see that some of the predictors have relationships with one another, which could be a problem for models that assume independent variables. Let’s get a sense of that by plotting the (Spearman) <em>correlation</em> between all the variables:</p>
+<div id="fe064803" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate correlation matrix.  We use Spearman because we observed some non-linear relationships in the pairplot.</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="op">=</span> auto_mpg[random_var_cols <span class="op">+</span> [target_col]].corr(<span class="st">'spearman'</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the correlation matrix as a heatmap</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>sns.heatmap(correlation_matrix, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'coolwarm'</span>, fmt<span class="op">=</span><span class="st">".2f"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Correlation Matrix"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_regression_complete_ASRI26_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The correlation matrix confirms our observations from the scatter plots. We can see strong negative correlations between MPG and weight, displacement, and horsepower. This suggests that these variables will be important predictors in our regression models.</p>
+<p>⚖️ Choosing the right random variables for prediction is <strong>vital</strong>. This is why it is a good idea to get to know your dataset early in the process!</p>
+<p><strong>Visualize early, visualize often!</strong></p>
+</section>
+</section>
+<section id="lets-see-how-well-we-can-predict-mpg-with-a-linear-model." class="level2">
+<h2 class="anchored" data-anchor-id="lets-see-how-well-we-can-predict-mpg-with-a-linear-model.">Let’s see how well we can predict MPG with a linear model.</h2>
+<p>First, we’ll use the <code>LinearRegression</code> model from scikit-learn.</p>
+<p>Based on the visualizations above, let’s start with a simple model using just weight and displacement as predictors:</p>
+<div id="f916a984" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>simple_random_var_cols <span class="op">=</span> [</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"weight"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"displacement"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For scoring, we will use <em>R²</em> and Mean Absolute Error (MAE).</p>
+<div id="9ce8247d" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>scoring_metrics <span class="op">=</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'r2'</span>: <span class="st">'r2'</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'mae'</span>: <span class="st">'neg_mean_absolute_error'</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To quickly determine if a linear model will be suitable for this task, we can use the <code>cross_validate()</code> function from Scikit-Learn. This function wraps up a <strong>lot</strong> of functionality. It will set up a <a href="https://scikit-learn.org/stable/modules/cross_validation.html"><em>k-fold cross validation</em> experiment</a> (with default of <span class="math inline">\(k=5\)</span>, for five-fold CV). It will take the model of your choice and automatically <em>train</em> the model for each training fold, then <em>predict</em> the test cases and <em>score</em> the predictions on the test folds (with the <em>R²</em> metric by default for regression).</p>
+<p>The scores for each fold are returned. We can calculate and report the mean score over all five folds along with the standard deviation of the scores to see whether the model is able to do a good job in general, and how much variation we would expect for different training sets.<br>
+Models should have high R² values, and a low standard deviation would indicate that the model generalizes to new data very well. (A high standard deviation would indicate the model is unstable and doesn’t generalize well.)<br>
+For the Mean Absolute Error metric, we want <em>smaller</em> values (less deviation from the true mpg, and a small standard deviation.</p>
+<p>The linear model will look like:</p>
+<p><span class="math display">\[
+y_{mpg} = \beta_0 + \beta_1 x_{weight} + \beta_2 x_{displacement}
+\]</span></p>
+<div id="90b38020" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    LinearRegression(), X<span class="op">=</span>auto_mpg[simple_random_var_cols], y<span class="op">=</span>auto_mpg[target_col],</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>scoring_metrics</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"mean R² : </span><span class="sc">{</span>scores[<span class="st">'test_r2'</span>]<span class="sc">.</span>mean()<span class="sc">:0.3f}</span><span class="ss">, std: </span><span class="sc">{</span>scores[<span class="st">'test_r2'</span>]<span class="sc">.</span>std()<span class="sc">:0.3f}</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"mean MAE: </span><span class="sc">{</span><span class="op">-</span>scores[<span class="st">'test_mae'</span>]<span class="sc">.</span>mean()<span class="sc">:0.1f}</span><span class="ss"> mpg, std: </span><span class="sc">{</span>scores[<span class="st">'test_mae'</span>]<span class="sc">.</span>std()<span class="sc">:0.1f}</span><span class="ss"> mpg."</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># print mean and standard deviation of score metrics</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mean R² : 0.326, std: 0.523
+mean MAE: 3.8 mpg, std: 1.4 mpg.</code></pre>
+</div>
+</div>
+<p>😞 The two-variable linear model seems pretty unstable at this task. Look closely at the R² mean: 0.326 is a pretty low R² value to begin with, and the standard deviation over the 5 runs of the cross-validation experiment was 0.523, which is larger than the mean value! That means that on average, the linear model can explain only about 33% of the variance in the data, and the high standard deviation means that the model is not generalizing very well.</p>
+<p>🤔 We might have expected this if we look back at our pair plots of weight and displacement versus mpg. Do you see the “curve” to the scatter? That is a good indicator that a linear model might not be ideal for this task.</p>
+<blockquote class="blockquote">
+<p><strong>⚠️ Beware Negative R² — R² is <em>not</em> a percentage from 0 to 100%:</strong> Despite often being described as “% of variance explained”, <strong>R² can actually be negative</strong>. A negative R² means your model performs <em>worse</em> than just predicting the average target value for every sample. If you see this on your own project, don’t assume your code is broken — it usually means the model is a poor fit for the data (wrong model family, too little signal, severe overfitting on the training set, or some combination). Also: a fold-level R² in cross-validation can swing wildly on small datasets, which is why we look at both the mean <em>and</em> the standard deviation.</p>
+</blockquote>
+<section id="lets-scale-the-model-up-to-use-all-of-our-predictors." class="level4">
+<h4 class="anchored" data-anchor-id="lets-scale-the-model-up-to-use-all-of-our-predictors.">Let’s scale the model up to use all of our predictors.</h4>
+<p>For now, we will stick with a linear model. But, let’s use all of our random variables to see if that improves the result.</p>
+<div id="3eb10498" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    LinearRegression(), X<span class="op">=</span>auto_mpg[random_var_cols], y<span class="op">=</span>auto_mpg[target_col],</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>scoring_metrics</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"mean R² : </span><span class="sc">{</span>scores[<span class="st">'test_r2'</span>]<span class="sc">.</span>mean()<span class="sc">:0.3f}</span><span class="ss">, std: </span><span class="sc">{</span>scores[<span class="st">'test_r2'</span>]<span class="sc">.</span>std()<span class="sc">:0.3f}</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"mean MAE: </span><span class="sc">{</span><span class="op">-</span>scores[<span class="st">'test_mae'</span>]<span class="sc">.</span>mean()<span class="sc">:0.1f}</span><span class="ss"> mpg, std: </span><span class="sc">{</span>scores[<span class="st">'test_mae'</span>]<span class="sc">.</span>std()<span class="sc">:0.1f}</span><span class="ss"> mpg."</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># print mean and standard deviation of score metrics</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mean R² : 0.571, std: 0.231
+mean MAE: 3.1 mpg, std: 0.8 mpg.</code></pre>
+</div>
+</div>
+<p>This provided a modest improvement, both in R² and standard deviation. We see a smaller change in MAE and its standard deviation, but still an improvement nonetheless.</p>
+</section>
+<section id="lets-try-a-non-linear-model." class="level4">
+<h4 class="anchored" data-anchor-id="lets-try-a-non-linear-model.">Let’s try a non-linear model.</h4>
+<p>Let’s consider a quadratic model (a polynomial model of degree 2). The model will look like:</p>
+<p><span class="math display">\[
+y_{mpg} = \beta_0 + \beta_1 x_{weight} + \beta_2 x_{displacement} + \beta_3 x_{weight}^2 + \beta_4 x_{displacement}^2
+\]</span></p>
+<p>The way we do this is to pre-compute the polynomial features <span class="math inline">\(x_{weight}^2\)</span> and <span class="math inline">\(x_{displacement}^2\)</span>, then use a linear regression model as before.</p>
+<div id="6b25990c" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>poly <span class="op">=</span> PolynomialFeatures(degree<span class="op">=</span><span class="dv">2</span>, include_bias<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    LinearRegression(), X<span class="op">=</span>poly.fit_transform(auto_mpg[random_var_cols]), y<span class="op">=</span>auto_mpg[target_col],</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>scoring_metrics</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"mean R² : </span><span class="sc">{</span>scores[<span class="st">'test_r2'</span>]<span class="sc">.</span>mean()<span class="sc">:0.3f}</span><span class="ss">, std: </span><span class="sc">{</span>scores[<span class="st">'test_r2'</span>]<span class="sc">.</span>std()<span class="sc">:0.3f}</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"mean MAE: </span><span class="sc">{</span><span class="op">-</span>scores[<span class="st">'test_mae'</span>]<span class="sc">.</span>mean()<span class="sc">:0.1f}</span><span class="ss"> mpg, std: </span><span class="sc">{</span>scores[<span class="st">'test_mae'</span>]<span class="sc">.</span>std()<span class="sc">:0.1f}</span><span class="ss"> mpg."</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># print mean and standard deviation of score metrics</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mean R² : 0.679, std: 0.222
+mean MAE: 2.6 mpg, std: 1.0 mpg.</code></pre>
+</div>
+</div>
+<p>🎉 Now we see a better result. R² above 65% is starting to look more promising (but not necessarily “good”). We see that on average our model is off by about 2.6 mpg. If that is an acceptable error amount, we might be happy with this one.</p>
+<blockquote class="blockquote">
+<p><strong>⚠️ Common Gotcha — Preprocessing Inside Cross-Validation:</strong> We took a small shortcut above by calling <code>poly.fit_transform(...)</code> on the <em>entire</em> dataset before passing it to <code>cross_validate</code>. That’s harmless here because <code>PolynomialFeatures</code> is a deterministic transform that doesn’t learn anything from the data. But many preprocessing steps <strong>do</strong> learn from the data — <code>StandardScaler</code> learns means and standard deviations, <code>SimpleImputer</code> learns medians, <code>PCA</code> learns directions, etc. If you fit those on the full dataset before splitting, information from the test folds <strong>leaks</strong> into training, and your CV scores will be optimistically biased.</p>
+<p>The clean solution is a Scikit-Learn <a href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html"><code>Pipeline</code></a>, which <code>cross_validate</code> will refit <em>inside each fold</em>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> make_pipeline(StandardScaler(), PolynomialFeatures(degree<span class="op">=</span><span class="dv">2</span>, include_bias<span class="op">=</span><span class="va">False</span>), LinearRegression())</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(pipe, X<span class="op">=</span>auto_mpg[random_var_cols], y<span class="op">=</span>auto_mpg[target_col], scoring<span class="op">=</span>scoring_metrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For your own project: whenever your preprocessing learns <em>anything</em> from the data, put it inside a <code>Pipeline</code>.</p>
+</blockquote>
+</section>
+<section id="now-lets-take-a-look-at-a-different-kind-of-model-just-for-comparison." class="level4">
+<h4 class="anchored">Now, let’s take a look at a different kind of model, just for comparison.</h4>
+<p>A <em>Random Forest</em> model is a non-linear model that works well for lots of tasks. Scikit-Learn provides one called <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html"><code>RandomForestRegressor</code></a> for regression tasks.</p>
+<p>Let’s try it in exactly the same experimental setup we used for the linear model.</p>
+<div id="4c06d74a" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    RandomForestRegressor(random_state<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>auto_mpg[random_var_cols],</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>auto_mpg[target_col],</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>scoring_metrics</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"mean R² : </span><span class="sc">{</span>scores[<span class="st">'test_r2'</span>]<span class="sc">.</span>mean()<span class="sc">:0.3f}</span><span class="ss">, std: </span><span class="sc">{</span>scores[<span class="st">'test_r2'</span>]<span class="sc">.</span>std()<span class="sc">:0.3f}</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"mean MAE: </span><span class="sc">{</span><span class="op">-</span>scores[<span class="st">'test_mae'</span>]<span class="sc">.</span>mean()<span class="sc">:0.1f}</span><span class="ss"> mpg, std: </span><span class="sc">{</span>scores[<span class="st">'test_mae'</span>]<span class="sc">.</span>std()<span class="sc">:0.1f}</span><span class="ss"> mpg."</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># print mean and standard deviation of score metrics</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mean R² : 0.748, std: 0.198
+mean MAE: 2.2 mpg, std: 0.8 mpg.</code></pre>
+</div>
+</div>
+<p>The random forest did even better than the quadratic model! This suggests that there might be non-linear relationships in the data that the random forest is able to capture better than either the linear or quadratic models.</p>
+<p><strong>One note:</strong></p>
+<p>We used <code>random_state=1</code> to <em>seed</em> the random number generator within the model, causing it to produce identical results if we train it again on the same data. Random forests (as implied by their name) rely on some randomness during training, so you don’t expect to get the same performance every time. This makes <strong>reproducible results</strong> difficult.</p>
+<p>By seeding the random state, we “lock” it to a specific outcome (assuming no external changes). This way, others can reproduce our results in the future.</p>
+<blockquote class="blockquote">
+<h3 id="how-do-i-choose-a-model-for-my-own-project" class="anchored" data-anchor-id="now-lets-take-a-look-at-a-different-kind-of-model-just-for-comparison."><strong>How do I choose a model for my own project?</strong></h3>
+<p>There is no single “best” regression model — it depends on the data.</p>
+<ol type="1">
+<li><strong>Start simple.</strong> Fit a <code>LinearRegression</code> first. It’s fast, interpretable, and gives you a baseline. If it works well, you may not need anything else.</li>
+<li><strong>Look at the residuals.</strong> If you see a curve, fan-shape, or other pattern (you’ll learn how to spot these in the next section), a linear model is missing something.</li>
+<li><strong>Try a more flexible model.</strong> Add polynomial features for a mild nonlinearity, or jump to a tree-based model like <code>RandomForestRegressor</code> or <code>GradientBoostingRegressor</code> for arbitrary nonlinear relationships and interactions.</li>
+<li><strong>Compare with cross-validation.</strong> Use the same CV setup (same folds, same metrics) so the comparison is apples-to-apples. Prefer the simpler model unless a more complex one is clearly better on <strong>both</strong> the mean score <em>and</em> the standard deviation.</li>
+<li><strong>Think about sample size.</strong> If you have fewer than a few dozen rows, even cross-validation can be unreliable. Be skeptical of any model trained on very small data — and be skeptical of <em>any</em> claim about which model is “best”.</li>
+</ol>
+<p>Domain matters when judging “good”: R² = 0.30 might be excellent for noisy biological or social-science data, while R² = 0.95 might be the floor for an engineering measurement. Always think about <em>your</em> application and <em>your</em> error tolerance requirements.</p>
+</blockquote>
+</section>
+</section>
+<section id="exploring-more-ways-to-characterize-regressor-performance." class="level2">
+<h2 class="anchored" data-anchor-id="exploring-more-ways-to-characterize-regressor-performance.">Exploring more ways to characterize regressor performance.</h2>
+<blockquote class="blockquote">
+<p><strong>How to Design Your Regression Experiment — CV vs.&nbsp;Train/Test Split:</strong></p>
+<p>So far we’ve used <strong>cross-validation</strong> to score models. Below, we switch to a single <strong>train/test split</strong>. Why use one vs.&nbsp;the other?</p>
+<ul>
+<li>Use <strong><code>cross_validate</code> (k-fold CV)</strong> when you want a <em>stable, averaged</em> score to <strong>compare models</strong> (Linear vs.&nbsp;Polynomial vs.&nbsp;Random Forest) or to <strong>tune hyperparameters</strong>. CV makes better use of small datasets and gives you a sense of variability across different train/test partitions. It is best for reporting model performance to critical reviewers.</li>
+<li>Use a <strong>single <code>train_test_split</code></strong> when you’ve already chosen your model and you want to <strong>train it once</strong> on a bulk training set so you can produce diagnostic plots (residuals, actual vs.&nbsp;predicted), inspect specific predictions, or hand the trained model off for downstream use. (Or, use it when the cost to <em>train</em> is high either in terms of price or time.) It is best when you <strong>already know</strong> your model choice and tuning parameters are good.</li>
+</ul>
+<p>A common workflow for your own project: use CV to pick the model, then do one final train/test split to produce plots and report metrics.</p>
+</blockquote>
+<section id="visualize" class="level3">
+<h3 class="anchored" data-anchor-id="visualize">📊 Visualize!</h3>
+<p>When evaluating regression models, it’s important to look at the residuals (the differences between predicted and actual values). A good regression model should have residuals that are randomly distributed around zero.</p>
+<p>Let’s split our data into training and testing sets, train our models, and then visualize the residuals:</p>
+<div id="73e08467" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and testing sets</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    auto_mpg[random_var_cols], auto_mpg[target_col], test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the linear regression model</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>linear_model <span class="op">=</span> LinearRegression().fit(X_train, y_train)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>linear_preds <span class="op">=</span> linear_model.predict(X_test)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate residuals</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>linear_residuals <span class="op">=</span> y_test <span class="op">-</span> linear_preds</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the residuals</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>plt.scatter(linear_preds, linear_residuals, alpha<span class="op">=</span><span class="fl">0.6</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>, color<span class="op">=</span><span class="st">'#1f77b4'</span>)</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predicted MPG'</span>)</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Residual Plot for Linear Regression'</span>)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_regression_complete_ASRI26_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>✨ <strong>Interpreting a residual plot:</strong> To interpret a residual plot like the one above, we look at two things: (1) The magnitude of the residuals, which represents how far our predictions are from the actual values. We want the dots to be close to the zero line. (2) The <strong><em>shape</em></strong> of the residuals. The plotted residuals are ordered by magnitude of the prediction from smallest to largest, covering the range of predicted values. What we <em>want</em> is to see no trend or “pattern” to the scatter of residuals versus the zero line. If we see a trend or pattern, then it is a clue that our model is not making the same mistakes across the range of its outputs, and so it might not be a good fit for the application.</p>
+<p>Here, we see that there is a “curve” in the residuals—they start above the zero line, trend downward, then back up again (a “smile” pattern). This is a clue that the actual target variable “mpg” is probably not a linear function of the predictors. A non-linear model might work better.</p>
+<p>Now let’s do the same plot for the Random Forest model:</p>
+<div id="847b87e3" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the random forest model</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>rf_model <span class="op">=</span> RandomForestRegressor(random_state<span class="op">=</span><span class="dv">1</span>).fit(X_train, y_train)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>rf_preds <span class="op">=</span> rf_model.predict(X_test)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate residuals</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>rf_residuals <span class="op">=</span> y_test <span class="op">-</span> rf_preds</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the residuals</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>plt.scatter(rf_preds, rf_residuals, alpha<span class="op">=</span><span class="fl">0.6</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>, color<span class="op">=</span><span class="st">'#1f77b4'</span>)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predicted MPG'</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Residual Plot for Random Forest'</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_regression_complete_ASRI26_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Here, we don’t see as much of a pattern.</strong> That is a <em>good thing</em>. For the most part, our Random Forest model seems to be making similar errors across its range, with two possible exceptions: The smaller predictions seem to be better than the larger ones in general, and there is a rough patch between about 22 and 32 mpg. where the model seems to be over-predicting more than everywhere else. An even more powerful model might be able to do a better job, but we won’t investigate that in this workshop.</p>
+<p>💡 <strong>Another way to visualize the errors:</strong> Let’s also compare the <em>actual vs.&nbsp;predicted</em> values for both models:</p>
+<div id="710e12b9" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure with two subplots</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">6</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot actual vs predicted for Linear Regression</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>ax1.scatter(y_test, linear_preds, alpha<span class="op">=</span><span class="fl">0.6</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>, color<span class="op">=</span><span class="st">'#1f77b4'</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>ax1.plot([y_test.<span class="bu">min</span>(), y_test.<span class="bu">max</span>()], [y_test.<span class="bu">min</span>(), y_test.<span class="bu">max</span>()], <span class="st">'r--'</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Actual MPG'</span>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'Predicted MPG'</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'Linear Regression: Actual vs Predicted'</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot actual vs predicted for Random Forest</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>ax2.scatter(y_test, rf_preds, alpha<span class="op">=</span><span class="fl">0.6</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>, color<span class="op">=</span><span class="st">'#1f77b4'</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>ax2.plot([y_test.<span class="bu">min</span>(), y_test.<span class="bu">max</span>()], [y_test.<span class="bu">min</span>(), y_test.<span class="bu">max</span>()], <span class="st">'r--'</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'Actual MPG'</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Predicted MPG'</span>)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">'Random Forest: Actual vs Predicted'</span>)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_regression_complete_ASRI26_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Interpretation:</strong> To interpret these plots, keep in mind that the dotted red line represents a “perfect fit” model. We don’t expect every dot to be on the line, but we want them <em>close</em> and <em>randomly spread</em> around it (no patterns). On the left plot (the linear model), we see a “bent” scatter of points compared to the line, indicating a bad fit. On the right, the Random Forest (RF) behaves better, but we can see the over-prediction in the mid-range and then the beginnings of under-prediction happing at the top end (similar to what we see on the linear model’s graph). Again, the RF looks better, but leaves room for improvement.</p>
+</section>
+<section id="non-visual-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="non-visual-metrics">Non-visual metrics</h3>
+<p>Let’s look at other regression metrics.</p>
+<p>Scikit-Learn provides several metrics appropriate for evaluating regression models. You can see the list at <a href="https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics" class="uri">https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics</a>.</p>
+<p>We’ll calculate some common metrics for both models:</p>
+<div id="d1464842" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate metrics for Linear Regression</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>linear_mse <span class="op">=</span> mean_squared_error(y_test, linear_preds)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>linear_rmse <span class="op">=</span> np.sqrt(linear_mse)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>linear_mae <span class="op">=</span> mean_absolute_error(y_test, linear_preds)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>linear_msd <span class="op">=</span> np.mean(linear_preds<span class="op">-</span>y_test)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>linear_r2 <span class="op">=</span> r2_score(y_test, linear_preds)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate metrics for Random Forest</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>rf_mse <span class="op">=</span> mean_squared_error(y_test, rf_preds)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>rf_rmse <span class="op">=</span> np.sqrt(rf_mse)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>rf_mae <span class="op">=</span> mean_absolute_error(y_test, rf_preds)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>rf_msd <span class="op">=</span> np.mean(rf_preds<span class="op">-</span>y_test)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>rf_r2 <span class="op">=</span> r2_score(y_test, rf_preds)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame to display the metrics</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>metrics_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Model'</span>: [<span class="st">'Linear Regression'</span>, <span class="st">'Random Forest'</span>],</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MSE'</span>: [linear_mse, rf_mse],</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'RMSE'</span>: [linear_rmse, rf_rmse],</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MAE'</span>: [linear_mae, rf_mae],</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MSD'</span>: [linear_msd, rf_msd],</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'R²'</span>: [linear_r2, rf_r2]</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>metrics_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Model</th>
+<th data-quarto-table-cell-role="th">MSE</th>
+<th data-quarto-table-cell-role="th">RMSE</th>
+<th data-quarto-table-cell-role="th">MAE</th>
+<th data-quarto-table-cell-role="th">MSD</th>
+<th data-quarto-table-cell-role="th">R²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Linear Regression</td>
+<td>10.502370</td>
+<td>3.240736</td>
+<td>2.503860</td>
+<td>0.179652</td>
+<td>0.794235</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Random Forest</td>
+<td>5.876812</td>
+<td>2.424214</td>
+<td>1.732253</td>
+<td>0.409367</td>
+<td>0.884860</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Let’s understand these metrics:</p>
+<ul>
+<li><strong>Mean Squared Error (MSE)</strong>: The average of the squared differences between predicted and actual values. Lower is better.</li>
+<li><strong>Root Mean Squared Error (RMSE)</strong>: The square root of MSE. It’s in the same units as the target variable, making it more interpretable. Lower is better.</li>
+<li><strong>Mean Absolute Error (MAE)</strong>: The average of the absolute differences between predicted and actual values. Lower is better.</li>
+<li><strong>Mean Signed Deviation (MSD)</strong>: The average of the differences between predicted and actual values, retaining the sign. Closer to zero is better, and the sign indicates the direction of the bias (e.g.&nbsp;model is over-predicting vs.&nbsp;under-predicting).</li>
+<li><strong>R² (Coefficient of Determination)</strong>: Represents the proportion of variance in the dependent variable that is predictable from the independent variables. Ranges from 0 to 1, with higher values indicating better fit.</li>
+</ul>
+<p>Based on these metrics, the Random Forest model outperforms the Linear Regression model on our test set. However, MSD reveals that the RF model is a bit more biased toward over-predicting the mpg than the linear model. So, when RF makes a mistake, it is more likely to favor higher mpg.</p>
+</section>
+<section id="feature-importance" class="level3">
+<h3 class="anchored" data-anchor-id="feature-importance">Feature Importance</h3>
+<p>Some models can provide information about the importance of each feature, allowing us to understand the underlying process better and perhaps perform feature selection to simplify our models. Different models do this differently.</p>
+<p><strong>Linear Regression</strong> models convey feature importance in the magnitude of the coefficients they compute for each feature. You can access this information for Scikit-Learn <code>LinearRegression</code> models in the <code>coef_</code> attribute.</p>
+<blockquote class="blockquote">
+<p><strong>⚠️ Gotcha — Linear Coefficients Are Scale-Dependent!</strong> A linear-regression coefficient tells you the change in the output per <em>one-unit</em> change in that feature. But our features are on wildly different scales: <code>weight</code> is in the thousands, <code>model_year</code> spans a couple of decades, <code>cylinders</code> is 3–8. A one-unit change in <code>weight</code> is tiny, so its coefficient is forced to be tiny too — even though weight is one of the <em>strongest</em> predictors of mpg!</p>
+<p><strong>If you compare raw coefficients directly, you will get a misleading picture of feature importance.</strong> This is one of the most common mistakes beginners make when reporting results from a linear model.</p>
+<p><strong>Remember:</strong> If you want to use linear coefficients for feature importance, <strong>scale your features first</strong> (e.g., with <code>StandardScaler</code>) so that a “one-unit change” means the same thing for every feature. Or, use a tree-based model like Random Forest, whose feature importances are scale-independent.</p>
+</blockquote>
+<p>Let’s do it the right way: scale the features with <code>StandardScaler</code>, then refit the linear model and inspect the (now comparable) coefficients.</p>
+<div id="ea01e287" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale features so a "one unit" change means "one standard deviation" for every feature.</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This makes the resulting coefficients directly comparable to one another.</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> scaler.fit_transform(X_train)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a fresh linear model on the scaled features.</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>linear_model_scaled <span class="op">=</span> LinearRegression().fit(X_train_scaled, y_train)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Take absolute values (we care about magnitude of effect, not direction here)</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co"># and normalize to sum to 1.0 so the bar chart is easy to read.</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>linear_feature_importance <span class="op">=</span> np.<span class="bu">abs</span>(linear_model_scaled.coef_)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>linear_feature_importance <span class="op">/=</span> np.<span class="bu">sum</span>(linear_feature_importance)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>linear_importance_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Feature'</span>: random_var_cols,</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Importance'</span>: linear_feature_importance</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>}).sort_values(<span class="st">'Importance'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">'Importance'</span>, y<span class="op">=</span><span class="st">'Feature'</span>, data<span class="op">=</span>linear_importance_df)</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Feature Importance from Linear Regression (on scaled features)'</span>)</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Relative Importance (|standardized coefficient|, normalized)"</span>)</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>linear_importance_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_regression_complete_ASRI26_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Feature</th>
+<th data-quarto-table-cell-role="th">Importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">3</th>
+<td>weight</td>
+<td>0.624023</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>model_year</td>
+<td>0.312223</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>cylinders</td>
+<td>0.022337</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">4</th>
+<td>acceleration</td>
+<td>0.019671</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1</th>
+<td>displacement</td>
+<td>0.011891</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2</th>
+<td>horsepower</td>
+<td>0.009854</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>After scaling, the picture is very different from what raw coefficients would have suggested. <code>weight</code> is now (correctly) near the top — which matches both intuition (heavier cars burn more fuel) and what we saw in the original scatterplots. <code>model_year</code> is also important, reflecting the real-world trend that fuel economy improved over the years of the dataset.</p>
+<blockquote class="blockquote">
+<p><strong>💡 Try it yourself:</strong> Re-run the cell above <strong>without</strong> scaling (fit the raw <code>X_train</code>, or look at <code>linear_model.coef_</code> from earlier). Notice how the apparent ranking flips dramatically. This is the “scale illusion” in action — and it’s why scaling is essential before interpreting linear coefficients as importances.</p>
+</blockquote>
+<p>The <code>RandomForestRegressor</code> model provides feature importance information in its <code>feature_importances_</code> attribute. Random forests do <strong>not</strong> require feature scaling — tree splits are based on thresholds, which are unaffected by the units of the input.</p>
+<div id="19cfd73c" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get feature importances from the Random Forest model (it is already normalized to sum to 1.0).</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>rf_feature_importance <span class="op">=</span> rf_model.feature_importances_</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame to display feature importance</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>importance_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Feature'</span>: random_var_cols,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Importance'</span>: rf_feature_importance</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by importance</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>importance_df <span class="op">=</span> importance_df.sort_values(<span class="st">'Importance'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot feature importances</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">'Importance'</span>, y<span class="op">=</span><span class="st">'Feature'</span>, data<span class="op">=</span>importance_df)</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Feature Importances from Random Forest Model'</span>)</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Relative Importance"</span>)</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_regression_complete_ASRI26_files/figure-html/cell-22-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>🤔 Notice that the RF model has a different conclusion about which feature is most important, choosing “displacement”. Displacement seemed highly correlated with mpg in the original scatterplot, but the relationship is highly non-linear, and has redundancy with “cylinders” and “horsepower”. The RF was able to use this variable in spite of these challenges.</p>
+</section>
+</section>
+<section id="working-with-categorical-features" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-categorical-features">Working with categorical features</h2>
+<p>So far, we’ve only used numeric features for our predictors. But the Auto MPG dataset also contains a categorical feature:</p>
+<ul>
+<li><code>origin</code> - three levels: [1, 2, 3] representing American, European, and Japanese cars respectively</li>
+</ul>
+<p>Let’s convert this numeric encoding to more meaningful labels first:</p>
+<div id="4036cdd8" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a mapping dictionary</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>origin_map <span class="op">=</span> {<span class="dv">1</span>: <span class="st">'American'</span>, <span class="dv">2</span>: <span class="st">'European'</span>, <span class="dv">3</span>: <span class="st">'Japanese'</span>}</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column with the mapped values</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>auto_mpg[<span class="st">'origin_name'</span>] <span class="op">=</span> auto_mpg[<span class="st">'origin'</span>].<span class="bu">map</span>(origin_map)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows to verify</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>auto_mpg[[<span class="st">'origin'</span>, <span class="st">'origin_name'</span>]].head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">origin</th>
+<th data-quarto-table-cell-role="th">origin_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1</td>
+<td>American</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1</td>
+<td>American</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1</td>
+<td>American</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1</td>
+<td>American</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>1</td>
+<td>American</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Now let’s visualize how MPG varies by origin:</p>
+<div id="0512cb89" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">'origin_name'</span>, y<span class="op">=</span><span class="st">'mpg'</span>, data<span class="op">=</span>auto_mpg)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'MPG by Car Origin'</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Origin'</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'MPG'</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_intermediate_regression_complete_ASRI26_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see that there are differences in MPG based on the car’s origin. Japanese cars tend to have higher MPG, followed by European cars, with American cars having the lowest MPG on average.</p>
+<p>To include this categorical variable in our regression models, we need to encode it. One common approach is <strong><em>one-hot encoding</em></strong>.</p>
+<p><strong><em>One-hot encoding</em></strong> is an encoding technique in which a variable with <span class="math inline">\(N\)</span> levels is split into <span class="math inline">\(N\)</span> new <em>pseudo-variables</em> where each is a binary variable encoded as 1 or 0.</p>
+<p>Let’s see how our <code>origin</code> variable might look if it were one-hot encoded:</p>
+<p><strong>Before</strong></p>
+<pre><code>mpg  cylinders  displacement  ...  origin  car_name
+20.5  6         200.0         ...  1       chevrolet malibu
+15.0  8         350.0         ...  1       buick skylark 320
+22.0  4         121.0         ...  2       volkswagen 411 (sw)
+26.0  4         98.00         ...  2       fiat 124 sport coupe
+32.0  4         71.00         ...  3       toyota corolla 1200
+24.0  4         120.0         ...  3       honda civic</code></pre>
+<p><strong>After</strong></p>
+<pre><code>mpg  cylinders  displacement  ...  origin_American  origin_European  origin_Japanese  car_name
+20.5  6         200.0         ...  1                0                0                chevrolet malibu
+15.0  8         350.0         ...  1                0                0                buick skylark 320
+22.0  4         121.0         ...  0                1                0                volkswagen 411 (sw)
+26.0  4         98.00         ...  0                1                0                fiat 124 sport coupe
+32.0  4         71.00         ...  0                0                1                toyota corolla 1200
+24.0  4         120.0         ...  0                0                1                honda civic</code></pre>
+<p><strong>Here’s the code:</strong></p>
+<p>Pandas can do this in a dataframe by using the <code>get_dummies()</code> method. You provide a prefix (like <code>"origin"</code>) and the existing levels are used to complete the new column names.</p>
+<blockquote class="blockquote">
+<p><strong>Aside — The “Dummy Variable Trap”:</strong> When you one-hot encode a categorical with <span class="math inline">\(N\)</span> levels, you technically only need <span class="math inline">\(N-1\)</span> columns: if a car is <em>not</em> American and <em>not</em> European, it must be Japanese. Keeping all <span class="math inline">\(N\)</span> columns creates <em>perfect multicollinearity</em> (the columns sum to 1.0, perfectly predicting the intercept), which can make a plain <code>LinearRegression</code> solver numerically unstable. In practice, Scikit-Learn’s solver and any regularized model (Ridge, Lasso) handle this fine, so you might never notice. But if you want to be strict, use <code>pd.get_dummies(..., drop_first=True)</code> to drop one level. Tree models like Random Forest don’t care either way.</p>
+</blockquote>
+<div id="174fa0ca" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>sample_rows <span class="op">=</span> [<span class="dv">253</span>, <span class="dv">1</span>, <span class="dv">77</span>, <span class="dv">114</span>, <span class="dv">131</span>, <span class="dv">149</span>] <span class="co"># this lets us select the same cars shown above</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>auto_mpg_encoded <span class="op">=</span> pd.get_dummies(        <span class="co"># get_dummies converts to one-hot encoding</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    auto_mpg, columns<span class="op">=</span>[<span class="st">"origin_name"</span>], prefix<span class="op">=</span><span class="st">"origin"</span>, dtype<span class="op">=</span><span class="bu">int</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>auto_mpg_encoded.loc[sample_rows][[<span class="st">'mpg'</span>, <span class="st">'origin_American'</span>, <span class="st">'origin_European'</span>, <span class="st">'origin_Japanese'</span>, <span class="st">'car_name'</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">origin_American</th>
+<th data-quarto-table-cell-role="th">origin_European</th>
+<th data-quarto-table-cell-role="th">origin_Japanese</th>
+<th data-quarto-table-cell-role="th">car_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">253</th>
+<td>20.5</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>chevrolet malibu</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>15.0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>buick skylark 320</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">77</th>
+<td>22.0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>volkswagen 411 (sw)</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">114</th>
+<td>26.0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>fiat 124 sport coupe</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">131</th>
+<td>32.0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>toyota corolla 1200</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">149</th>
+<td>24.0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>honda civic</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Now let’s use these one-hot encoded features in our regression models:</p>
+<div id="1e83833b" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define columns including one-hot encoded origin</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>all_features <span class="op">=</span> random_var_cols <span class="op">+</span> [<span class="st">'origin_American'</span>, <span class="st">'origin_European'</span>, <span class="st">'origin_Japanese'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now we will evaluate each of our models with a 5-fold CV like we did in the beginning, and compare the original features to the ones with origin information included:</p>
+<div id="fbe372b3" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a helper function so we don't have to repeat this code too much</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> do_evaluation(model, X, y, caption):</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> cross_validate( model, X, y, scoring<span class="op">=</span>scoring_metrics)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>caption<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"mean R² : </span><span class="sc">{</span>scores[<span class="st">'test_r2'</span>]<span class="sc">.</span>mean()<span class="sc">:0.3f}</span><span class="ss">, std: </span><span class="sc">{</span>scores[<span class="st">'test_r2'</span>]<span class="sc">.</span>std()<span class="sc">:0.3f}</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"mean MAE: </span><span class="sc">{</span><span class="op">-</span>scores[<span class="st">'test_mae'</span>]<span class="sc">.</span>mean()<span class="sc">:0.1f}</span><span class="ss"> mpg, std: </span><span class="sc">{</span>scores[<span class="st">'test_mae'</span>]<span class="sc">.</span>std()<span class="sc">:0.2f}</span><span class="ss"> mpg.</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    )  <span class="co"># print mean and standard deviation of score metrics</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="4c278e65" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>do_evaluation(LinearRegression(), X<span class="op">=</span>auto_mpg[random_var_cols], y<span class="op">=</span>auto_mpg[target_col], caption<span class="op">=</span><span class="st">"Linear Regression without origin info:"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>do_evaluation(LinearRegression(), X<span class="op">=</span>auto_mpg_encoded[all_features], y<span class="op">=</span>auto_mpg_encoded[target_col], caption<span class="op">=</span><span class="st">"Linear Regression including origin info:"</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"---</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>poly <span class="op">=</span> PolynomialFeatures(degree<span class="op">=</span><span class="dv">2</span>, include_bias<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>do_evaluation(LinearRegression(), X<span class="op">=</span>poly.fit_transform(auto_mpg[random_var_cols]), y<span class="op">=</span>auto_mpg[target_col], caption<span class="op">=</span><span class="st">"Polynomial (d=2) Regression without origin info:"</span>)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>do_evaluation(LinearRegression(), X<span class="op">=</span>poly.fit_transform(auto_mpg_encoded[all_features]), y<span class="op">=</span>auto_mpg_encoded[target_col], caption<span class="op">=</span><span class="st">"Polynomial (d=2) Regression including origin info:"</span>)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"---</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>do_evaluation(RandomForestRegressor(random_state<span class="op">=</span><span class="dv">1</span>), X<span class="op">=</span>auto_mpg[random_var_cols], y<span class="op">=</span>auto_mpg[target_col], caption<span class="op">=</span><span class="st">"Random Forest regression without origin info:"</span>)</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>do_evaluation(RandomForestRegressor(random_state<span class="op">=</span><span class="dv">1</span>), X<span class="op">=</span>auto_mpg_encoded[all_features], y<span class="op">=</span>auto_mpg_encoded[target_col], caption<span class="op">=</span><span class="st">"Random Forest regression including origin info:"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear Regression without origin info:
+mean R² : 0.571, std: 0.231
+mean MAE: 3.1 mpg, std: 0.76 mpg.
+
+Linear Regression including origin info:
+mean R² : 0.594, std: 0.197
+mean MAE: 3.0 mpg, std: 0.68 mpg.
+
+---
+
+Polynomial (d=2) Regression without origin info:
+mean R² : 0.679, std: 0.222
+mean MAE: 2.6 mpg, std: 0.97 mpg.
+
+Polynomial (d=2) Regression including origin info:
+mean R² : 0.661, std: 0.210
+mean MAE: 2.6 mpg, std: 0.85 mpg.
+
+---
+
+Random Forest regression without origin info:
+mean R² : 0.748, std: 0.198
+mean MAE: 2.2 mpg, std: 0.76 mpg.
+
+Random Forest regression including origin info:
+mean R² : 0.752, std: 0.194
+mean MAE: 2.2 mpg, std: 0.77 mpg.
+</code></pre>
+</div>
+</div>
+<p>Including the origin as a categorical feature has improved our model performance in the linear regression model, but not significantly. The other models were mostly unchanged by the addition of this variable.</p>
+<p>However, categorical variables can be very important in some datasets! Consider encoding them and using them in the model; you can evaluate whether or not it was worthwhile before training your final model version.</p>
+<section id="theres-more-than-one-way-to-do-it" class="level4">
+<h4 class="anchored" data-anchor-id="theres-more-than-one-way-to-do-it">There’s More Than One Way to Do It</h4>
+<p>You can also use the <code>OneHotEncoder</code> from Scikit-Learn to encode categorical variables. It’s particularly useful when you don’t want to modify your original dataframe and prefer to create a “data pipeline” for preprocessing your data during training or inference.</p>
+<p>In fact, there are <em>several</em> other approaches to encoding categorical values.</p>
+<p>You can learn a lot more here: <a href="https://www.kaggle.com/code/arashnic/an-overview-of-categorical-encoding-methods" class="uri">https://www.kaggle.com/code/arashnic/an-overview-of-categorical-encoding-methods</a></p>
+</section>
+</section>
+<section id="thank-you" class="level2">
+<h2 class="anchored" data-anchor-id="thank-you">Thank You!</h2>
+<p>This notebook in tutorial and completed form is available at:</p>
+<p><a href="https://jcausey-astate.github.io/ASRI-2026/" class="uri">https://jcausey-astate.github.io/ASRI-2026/</a></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

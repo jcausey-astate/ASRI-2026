@@ -10,6 +10,7 @@
 
 ## June 04: Regression Techniques in Python (Intermediate)
 
+<!-- 
 ::: {.indented}
 
 #### Workshop version (with open exercises to complete)
@@ -22,11 +23,11 @@
 
 #### [Non-interactive web version](python_intermediate_regression_complete_ASRI26.html)
 
-:::
+::: -->
 
 ## June 05: Classification Techniques in Python (Intermediate)
 
-::: {.indented}
+<!-- ::: {.indented}
 
 #### Workshop version (with open exercises to complete)
 
@@ -38,11 +39,11 @@
 
 #### [Non-interactive web version](python_intermediate_classification_complete_ASRI26.html)
 
-:::
+::: -->
 
 ## June 09: Clustering Techniques in Python (Intermediate)
 
-::: {.indented}
+<!-- ::: {.indented}
 
 #### Workshop version (with open exercises to complete)
 
@@ -54,7 +55,7 @@
 
 #### [Non-interactive web version](python_intermediate_clustering_complete_ASRI26.html)
 
-:::
+::: -->
 
 :::{#footer}
 2026 [Jason L. Causey](https://jasoncausey.net/cv/){target=_blank},  [Department of Computer Science, Arkansas State University](https://www.astate.edu/college/ecs/computer-science/){target=_blank}. [ORCiD: 0000-0002-3985-2919](https://orcid.org/0000-0002-3985-2919){target=_blank}
