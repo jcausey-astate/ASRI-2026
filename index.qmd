@@ -58,5 +58,5 @@
 ::: -->
 
 :::{#footer}
-2026 [Jason L. Causey](https://jasoncausey.net/cv/){target=_blank},  [Department of Computer Science, Arkansas State University](https://www.astate.edu/college/ecs/computer-science/){target=_blank}. [ORCiD: 0000-0002-3985-2919](https://orcid.org/0000-0002-3985-2919){target=_blank}
+2026 [Jason L. Causey](https://jasoncausey.net/cv/){target=_blank},  [Department of Computer Science, Arkansas State University](https://www.astate.edu/colleges/engineering-and-computer-science/computer-science.html){target=_blank}. [ORCiD: 0000-0002-3985-2919](https://orcid.org/0000-0002-3985-2919){target=_blank}
 :::
