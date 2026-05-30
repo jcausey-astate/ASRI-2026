@@ -2,19 +2,17 @@
 
 body {
     font-size: 11pt;
+    font-family: 'Nunito Sans', 'Helvetica Neue', sans-serif;
 }
 
 h1 {
-    #footer {
-        font-size: 8pt;
-        position: absolute;
-        right: 0.
-    }
-    font-weight: 900;
+    font-weight: 700;
     font-size: 2.42em;
 }
 h1 a {
+    font-weight: 700;
     text-decoration: none;
+    color: inherit;
 }
 
 h2 {
@@ -40,7 +38,7 @@ h2 {
 .note {
     b,strong{
         font-size: 1.1em;
-        font-weight: 900;
+        font-weight: 500;
         font-style: normal;
     }
     position: relative;
