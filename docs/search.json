@@ -102,7 +102,7 @@
     "href": "index.html#june-04-regression-techniques-in-python-intermediate",
     "title": "Notebooks for ASRI-2026 Summer Workshops",
     "section": "June 04: Regression Techniques in Python (Intermediate)",
-    "text": "June 04: Regression Techniques in Python (Intermediate)\n\n\nWorkshop version (with open exercises to complete)\nhttps://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_regression_ASRI26.ipynb\n\n\nCompleted version for reference\nComing soon after the workshop is complete.\n\n\n\nJune 05: Classification Techniques in Python (Intermediate)\n\n\n\nJune 09: Clustering Techniques in Python (Intermediate)\n\n\n2026 Jason L. Causey, Department of Computer Science, Arkansas State University. ORCiD: 0000-0002-3985-2919"
+    "text": "June 04: Regression Techniques in Python (Intermediate)\n\n\nWorkshop version (with open exercises to complete)\nhttps://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_regression_ASRI26.ipynb\n\n\nCompleted version for reference\nhttps://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_regression_complete_ASRI26.ipynb\n\n\nNon-interactive web version"
   },
   {
     "objectID": "index.html#june-05-classification-techniques-in-python-intermediate",

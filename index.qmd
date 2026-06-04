@@ -20,15 +20,11 @@
 
 #### Completed version for reference
 
-_Coming soon after the workshop is complete._
-
-<!-- 
-
 <https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_regression_complete_ASRI26.ipynb>
 
 #### [Non-interactive web version](python_intermediate_regression_complete_ASRI26.html)
 
-::: -->
+:::
 
 ## June 05: Classification Techniques in Python (Intermediate)
 
