@@ -27,12 +27,13 @@
 
 ## June 05: Classification Techniques in Python (Intermediate)
 
-<!-- ::: {.indented}
+::: {.indented}
 
 #### Workshop version (with open exercises to complete)
 
 <https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_classification_ASRI26.ipynb>
 
+<!-- 
 #### Completed version for reference
 
 <https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_classification_complete_ASRI26.ipynb>
