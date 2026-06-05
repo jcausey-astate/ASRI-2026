@@ -36,13 +36,9 @@
 
 #### Completed version for reference
 
-_This notebook will be posted soon after the workshop ends._
-
-<!-- 
 <https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_classification_complete_ASRI26.ipynb>
 
 #### [Non-interactive web version](python_intermediate_classification_complete_ASRI26.html)
- -->
 
 :::
 
