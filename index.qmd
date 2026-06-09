@@ -44,13 +44,17 @@
 
 ## June 09: Clustering Techniques in Python (Intermediate)
 
-<!-- ::: {.indented}
+::: {.indented}
 
 #### Workshop version (with open exercises to complete)
 
 <https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_clustering_ASRI26.ipynb>
 
 #### Completed version for reference
+
+_Link will be available soon after the workshop concludes._
+
+<!-- 
 
 <https://colab.research.google.com/github/jcausey-astate/ASRI-2026/blob/main/python_intermediate_clustering_complete_ASRI26.ipynb>
 
